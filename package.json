@@ -1,0 +1,48 @@
+{
+  "name": "lose-yourself-to-dance",
+  "version": "0.0.1",
+  "description": "Play the guitar on Daft Punk's Lose Yourself To Dance.",
+  "main": "build/index.js",
+  "homepage": "TODO",
+  "author": {
+    "name": "Sébastien Robaszkiewicz",
+    "email": "hello@robi.me",
+    "url": "http://robi.me"
+  },
+  "repository": "TODO",
+  "standalone": "script",
+  "scripts": {
+    "bundle": "node ./bin/scripts.js --bundle",
+    "csv2json": "node ./bin/csv-scripts.js",
+    "hint": "jshint ./src; true",
+    "postbundle": "npm run uglify",
+    "prebundle": "npm run hint && npm run transpile",
+    "sass": "node ./bin/scripts.js --sass",
+    "transpile": "node ./bin/scripts.js --transpile",
+    "uglify": "node ./bin/scripts.js --uglify",
+    "watch": "node ./bin/scripts.js --watch"
+  },
+  "jshintConfig": {
+    "esnext": true,
+    "browser": true,
+    "node": true,
+    "devel": true
+  },
+  "dependencies": {
+    "babel-runtime": "^5.8.19",
+    "motion-input": "collective-soundworks/motion-input#1.0.2",
+    "waves-audio": "wavesjs/audio",
+    "waves-loaders": "wavesjs/loaders"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "browserify": "^11.0.1",
+    "cli-color": "^1.0.0",
+    "csv-parse": "^1.0.0",
+    "fs-extra": "^0.22.1",
+    "jshint": "^2.8.0",
+    "node-sass": "^3.2.0",
+    "node-watch": "^0.3.4",
+    "uglify-js": "^2.4.24"
+  }
+}

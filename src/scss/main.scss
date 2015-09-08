@@ -1,0 +1,175 @@
+/**
+ * @fileoverview Main stylesheet
+ * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
+ */
+
+@import 'reset';
+@import 'animation-mixins';
+@import 'transform-mixins';
+@import 'flexbox-mixins';
+@import 'icons';
+
+html, body {
+  height: 100%;
+  font-size: 10px;
+}
+
+body {
+  // background-image: url(../img/bg.jpg);
+  background-color: #111;
+  color: white;
+  font-family: 'Lato', 'sans-serif';
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+}
+
+.container {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  height: 100%;
+  margin: 0rem 2rem;
+}
+
+header, footer {
+  margin: 2rem 0
+}
+
+.title {
+  letter-spacing: 0.7rem;
+  line-height: 1.3;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}
+
+.instructions {
+  font-family: 'Merriweather', 'serif';
+  font-style: italic;
+  letter-spacing: 0.08rem;
+}
+
+.button i {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px white;
+  font-size: 6rem;
+  padding: 2rem;
+}
+
+.dot-nav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+  max-width: 50rem;
+  margin: auto;
+  @include flexbox;
+  @include justify-content(space-between);
+
+  li {
+    width: 33%;
+    cursor: pointer;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .dot {
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px white;
+    height: 1.5rem;
+    margin: auto;
+    width: 1.5rem;
+  }
+
+  .dot::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: '';
+    height: inherit;
+    position: absolute;
+    width: inherit;
+    margin-left: -0.75rem;
+    @include transform(scale(0));
+  	@include transform-origin('50% 50%');
+  	@include transition('-webkit-transform 0.3s ease');
+  }
+
+  .selected .dot::after {
+    @include transform(scale(1));
+  }
+}
+
+/* Modernizr */
+.touchevents {
+
+}
+
+.no-touchevents {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width: 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.45rem;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  html, body {
+    font-size: 14px;
+  }
+
+  .icons {
+    margin-top: 3.5rem;
+
+    .diamond::before {
+      border: 2px solid white;
+    }
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+  html, body {
+    font-size: 16px;
+  }
+
+  .title {
+    letter-spacing: 0.9rem;
+  }
+
+  .icons {
+    margin-top: 4rem;
+
+    li {
+      margin: 0 2.25rem;
+    }
+  }
+}
