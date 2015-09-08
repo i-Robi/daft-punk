@@ -76,9 +76,6 @@ body {
 h1 {
   font-size: 2rem; }
 
-h2 {
-  font-size: 1.1rem; }
-
 .container {
   display: -webkit-box;
   display: -webkit-flex;
@@ -111,7 +108,7 @@ header, footer {
 .instructions {
   font-family: 'Merriweather', 'serif';
   font-style: italic;
-  letter-spacing: 0.08rem; }
+  letter-spacing: 0.1rem; }
 
 .button i {
   border-radius: 50%;

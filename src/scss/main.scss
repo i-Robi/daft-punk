@@ -15,7 +15,6 @@ html, body {
 }
 
 body {
-  // background-image: url(../img/bg.jpg);
   background-color: #111;
   color: white;
   font-family: 'Lato', 'sans-serif';
@@ -27,10 +26,6 @@ body {
 
 h1 {
   font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.1rem;
 }
 
 .container {
@@ -55,7 +50,7 @@ header, footer {
 .instructions {
   font-family: 'Merriweather', 'serif';
   font-style: italic;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.1rem;
 }
 
 .button i {
