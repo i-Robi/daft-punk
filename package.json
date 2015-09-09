@@ -1,15 +1,15 @@
 {
-  "name": "lose-yourself-to-dance",
-  "version": "0.0.1",
-  "description": "Play the guitar on Daft Punk's Lose Yourself To Dance.",
+  "name": "draft-punk",
+  "version": "0.9.0",
+  "description": "Interactive version of Daft Punk's Lose Yourself To Dance.",
   "main": "build/index.js",
-  "homepage": "TODO",
+  "homepage": "http://robi.me/draft-punk",
   "author": {
     "name": "Sébastien Robaszkiewicz",
     "email": "hello@robi.me",
     "url": "http://robi.me"
   },
-  "repository": "TODO",
+  "repository": "i-Robi/draft-punk",
   "standalone": "script",
   "scripts": {
     "bundle": "node ./bin/scripts.js --bundle",
