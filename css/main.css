@@ -4,13 +4,8 @@
  * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
  */
 /**
- * @fileoverview Animation & keyframes mixin
- * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
- *
- * The code in this file is inspired by:
- *   http://meyerweb.com/eric/tools/css/reset/
- *   v2.0 | 20110126
- *   License: none (public domain)
+ * @file Reset basic CSS properties
+ * @author Sébastien Robaszkiewicz (sebastien@robaszkiewicz.com)
  */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, ol, li, button, input, option, select {
   margin: 0;
@@ -32,8 +27,12 @@ a {
   -webkit-tap-highlight-color: transparent; }
 
 /**
- * @fileoverview Animation & transitions mixins
- * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
+ * @file Animation & transitions mixins
+ * @author Sébastien Robaszkiewicz (sebastien@robaszkiewicz.com)
+ */
+/**
+ * @file Transform mixins
+ * @author Sébastien Robaszkiewicz (sebastien@robaszkiewicz.com)
  */
 @font-face {
   font-family: 'icons';
@@ -179,19 +178,10 @@ header, footer {
 /* Modernizr */
 /* Custom, iPhone Retina */
 /* Extra Small Devices, Phones */
-@media only screen and (min-width: 480px) {
-  .subtitle {
-    font-size: 1.2rem;
-    letter-spacing: 0.45rem; } }
-
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
   html, body {
-    font-size: 14px; }
-  .icons {
-    margin-top: 3.5rem; }
-    .icons .diamond::before {
-      border: 2px solid white; } }
+    font-size: 14px; } }
 
 /* Medium Devices, Desktops */
 /* Large Devices, Wide Screens */
@@ -199,8 +189,4 @@ header, footer {
   html, body {
     font-size: 16px; }
   .title {
-    letter-spacing: 0.9rem; }
-  .icons {
-    margin-top: 4rem; }
-    .icons li {
-      margin: 0 2.25rem; } }
+    letter-spacing: 0.9rem; } }

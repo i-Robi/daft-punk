@@ -1,3 +1,8 @@
+/**
+ * @file Transform mixins
+ * @author Sébastien Robaszkiewicz (sebastien@robaszkiewicz.com)
+ */
+
 // transform
 @mixin transform($transforms) {
 	-webkit-transform: $transforms;

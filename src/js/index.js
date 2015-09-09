@@ -30,18 +30,19 @@ function startWebAudio() {
 let webAudioStarted = false;
 let playing = false;
 
-// Initialization & constants
-const loader = new SuperLoader();
+// Constants (song specific)
+const mode = 0;
 const offset = 2.400;
 const period = 0.150;
 
 // Script
 (function() {
+  const loader = new SuperLoader();
+
   // Prevent scrolling
   document.body.addEventListener('touchmove', (e) => {
     e.preventDefault();
   });
-
 
   Promise.all([
     loader.load(['assets/backtrack.mp3', 'assets/guitar.mp3', 'assets/guitar-markers.json']),
@@ -63,7 +64,7 @@ const period = 0.150;
     // Instrument engine (guitar)
     const guitarEngine = new GuitarEngine({
       audioBuffer: guitarBuffer,
-      mode: 0,
+      mode: mode,
       offset: offset,
       period: period,
       segmentMarkers: guitarMarkers
@@ -83,7 +84,7 @@ const period = 0.150;
     const dotNav = new DotNav({
       callback: guitarEngine.changeMode.bind(guitarEngine),
       nav: nav,
-      selected: 1
+      selected: mode
     });
 
     // Button
