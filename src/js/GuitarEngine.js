@@ -12,7 +12,9 @@ const TimeEngine = require('waves-audio').TimeEngine;
 
 // Helper functions
 function getMaxOfArray(array) {
-  return Math.max.apply(null, array);
+  if (array.length > 0)
+    return Math.max.apply(null, array);
+  return null;
 }
 
 function getRandomInt(min, max) {
@@ -102,9 +104,10 @@ class GuitarEngine extends TimeEngine {
     // Private attributes
     this._chordProgression = generateChordProgression();
     this._energyBuffer = [];
-    this._energyBufferMaxLength = 2; // TODO
+    this._energyBufferMaxLength = 2; // TODO: automate
     this._lastBeatPlayed = null;
     this._mode = options.mode;
+    this._numBeats = options.numBeats;
     this._p1 = null;
     this._p1Accent = null;
     this._p1NoAccent = null;
@@ -114,6 +117,8 @@ class GuitarEngine extends TimeEngine {
     this._segmentEngine = new SegmentEngine();
     this._segmentIndices = sortMarkerIndices(options.segmentMarkers);
     this._segmentMarkers = options.segmentMarkers;
+    this._scratchBuffer = [];
+    this._scratchBufferMaxLength = 5; // TODO: automate
 
     // Segment engine configuration
     this._segmentEngine.buffer = options.audioBuffer;
@@ -136,35 +141,14 @@ class GuitarEngine extends TimeEngine {
     return nextPosition;
   }
 
-  /**
-   *
-   */
-  // advancePosition(time, position, speed) {
-  //   const currentBeat = Math.floor((time - this.startTime - this.offset) / this.period);
-  //   const eMax = getMaxOfArray(this._energyBuffer);
-  //   const rand = Math.random();
-  //   let p = 0.5;
-  //
-  //   if (accents.indexOf(currentBeat % 16) === -1)
-  //     p = 0.9;
-  //
-  //   if ((eMax > 0.9 && rand > p) || eMax === 1)
-  //     this.trigger(time, 'chord');
-  //   else if (eMax > 0.6)
-  //     this.trigger(time, 'mute')
-  //
-  //   if (speed < 0)
-  //     return position - this.period;
-  //
-  //   return position + this.period;
-  // }
-
   advancePosition(time, position, speed) {
     const currentBeat = Math.floor(
       (time - this.startTime - this.offset) / this.period
     );
-    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2) // TODO (inputM)
     const rand = Math.random();
+    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2); // TODO (inputM)
+    const sMax = getMaxOfArray(this._scratchBuffer);
+    const level = Math.max(eMax, sMax);
 
     // If the beat is on the original song's accents, high probability to play
     if (accents.indexOf(currentBeat % 16) > -1)
@@ -181,11 +165,11 @@ class GuitarEngine extends TimeEngine {
     const p = Math.max(this._p1, Math.min(this._p1 * this._p2, 1));
 
     // Decide what to play
-    if (eMax > 0.9 && rand < p) {
+    if (level > 0.9 && rand < p) {
       this.trigger(time, 'chord');
       this._lastBeatPlayed = currentBeat;
       this._p2 = this._p2BaseValue;
-    } else if (eMax > 0.5)
+    } else if (level > 0.5)
       this.trigger(time, 'mute');
 
     if (speed < 0)
@@ -202,7 +186,7 @@ class GuitarEngine extends TimeEngine {
     let currentChord;
     let index;
 
-    if (currentBeat >= 0 && currentBeat < 200)
+    if (currentBeat >= 0 && currentBeat < this._numBeats)
       currentChord = this._chordProgression[currentBeat];
 
     if (type === 'chord' && currentChord)
@@ -211,7 +195,7 @@ class GuitarEngine extends TimeEngine {
       index = getRandomValue(this._segmentIndices['mute']);
 
     // Stop playing after the end of the backtrack
-    if (currentBeat < 200) {
+    if (currentBeat < this._numBeats) {
       this._segmentEngine.segmentIndex = index;
       this._segmentEngine.trigger(time);
     }
@@ -225,6 +209,16 @@ class GuitarEngine extends TimeEngine {
       this._energyBuffer.pop();
 
     this._energyBuffer.unshift(val);
+  }
+
+  /**
+   *
+   */
+  onScratch(val) {
+    if (this._scratchBuffer.length === this._scratchBufferMaxLength)
+      this._scratchBuffer.pop();
+
+    this._scratchBuffer.unshift(val);
   }
 
   /**

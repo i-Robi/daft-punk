@@ -98,18 +98,31 @@ h1 {
 header, footer {
   margin: 2rem 0; }
 
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
 .title {
   letter-spacing: 0.7rem;
   line-height: 1.3;
   margin: 1rem 0;
+  text-indent: 0.7rem;
   text-transform: uppercase; }
 
 .instructions {
   font-family: 'Merriweather', 'serif';
   font-style: italic;
-  letter-spacing: 0.1rem; }
+  letter-spacing: 0.1rem;
+  text-indent: 0.1rem; }
+
+.loader {
+  font-size: 2.4rem;
+  letter-spacing: 1.5rem;
+  text-indent: 1.5rem;
+  text-transform: uppercase; }
 
 .button i {
+  display: inline-block;
   border-radius: 50%;
   box-shadow: inset 0 0 0 2px white;
   font-size: 6rem;
@@ -138,6 +151,7 @@ header, footer {
     font-size: 0.8rem;
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;
+    text-indent: 0.1rem;
     text-transform: uppercase; }
   .dot-nav .dot {
     border-radius: 50%;
@@ -176,6 +190,53 @@ header, footer {
     transform: scale(1); }
 
 /* Modernizr */
+.soft-blink {
+  -webkit-animation: soft-blink 3.6s ease-in-out infinite;
+  -moz-animation: soft-blink 3.6s ease-in-out infinite;
+  -ms-animation: soft-blink 3.6s ease-in-out infinite;
+  -o-animation: soft-blink 3.6s ease-in-out infinite;
+  animation: soft-blink 3.6s ease-in-out infinite; }
+
+@-webkit-keyframes soft-blink {
+  0% {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.3; }
+  100% {
+    opacity: 1.0; } }
+
+@-moz-keyframes soft-blink {
+  0% {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.3; }
+  100% {
+    opacity: 1.0; } }
+
+@-ms-keyframes soft-blink {
+  0% {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.3; }
+  100% {
+    opacity: 1.0; } }
+
+@-o-keyframes soft-blink {
+  0% {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.3; }
+  100% {
+    opacity: 1.0; } }
+
+@keyframes soft-blink {
+  0% {
+    opacity: 1.0; }
+  50% {
+    opacity: 0.3; }
+  100% {
+    opacity: 1.0; } }
+
 /* Custom, iPhone Retina */
 /* Extra Small Devices, Phones */
 /* Small Devices, Tablets */
@@ -189,4 +250,5 @@ header, footer {
   html, body {
     font-size: 16px; }
   .title {
-    letter-spacing: 0.9rem; } }
+    letter-spacing: 0.9rem;
+    text-indent: 0.9rem; } }
