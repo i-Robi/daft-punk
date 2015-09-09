@@ -13,6 +13,7 @@ const input = require('motion-input');
 const SuperLoader = require('waves-loaders').SuperLoader;
 const PlayControl = require('waves-audio').PlayControl;
 const PlayerEngine = require('waves-audio').PlayerEngine;
+const Scratch = require('./Scratch');
 const Transport = require('waves-audio').Transport;
 
 // Helper functions
@@ -29,6 +30,7 @@ function startWebAudio() {
 // Helper variables
 let webAudioStarted = false;
 let playing = false;
+let timeout = null;
 
 // Constants (song specific)
 const mode = 0;
@@ -65,6 +67,7 @@ const period = 0.150;
     const guitarEngine = new GuitarEngine({
       audioBuffer: guitarBuffer,
       mode: mode,
+      numBeats: 200,
       offset: offset,
       period: period,
       segmentMarkers: guitarMarkers
@@ -88,7 +91,7 @@ const period = 0.150;
     });
 
     // Button
-    let button = document.getElementById('button');
+    let button = document.getElementById('button').querySelector('i');
     button.addEventListener('click', () => {
       if (!webAudioStarted) {
         startWebAudio();
@@ -99,21 +102,47 @@ const period = 0.150;
         playControl.start();
         guitarEngine.start();
         playing = true;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          playControl.stop();
+          guitarEngine.stop(); // TODO: remove if empty
+          button.classList.toggle('icon-play');
+          button.classList.toggle('icon-stop');
+          playing = false;
+        }, backtrackBuffer.duration * 1000)
       } else {
         playControl.stop();
         guitarEngine.stop(); // TODO: remove if empty
         playing = false;
+        clearTimeout(timeout);
       }
 
-      button.querySelector('i').classList.toggle('icon-play');
-      button.querySelector('i').classList.toggle('icon-stop');
+      button.classList.toggle('icon-play');
+      button.classList.toggle('icon-stop');
+    });
+
+    // Toggle loading / button
+    document.getElementById('loader').classList.toggle('hidden');
+    document.getElementById('button').classList.toggle('hidden');
+
+    // Scratch
+    const scratch = new Scratch();
+    scratch.on('scratch', (val) => {
+      guitarEngine.onScratch(val);
     });
 
     // Input module listener
+    const instr = document.querySelector('.instructions')
     if (energy.isValid) {
+      instr.innerHTML = `hit &lsquo;play&rsquo; and shake your device
+        </br>(or scratch the screen)`;
       input.addListener('energy', (val) => {
         guitarEngine.onEnergy(val);
       });
+    } else if ('ontouchstart' in window) {
+      instr.innerHTML = 'hit &lsquo;play&rsquo; and scratch the screen';
+    } else {
+      instr.innerHTML = 'hit &lsquo;play&rsquo; and move your mouse';
     }
   });
 }());
