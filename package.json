@@ -1,6 +1,6 @@
 {
   "name": "draft-punk",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Interactive version of Daft Punk's Lose Yourself To Dance.",
   "main": "build/index.js",
   "homepage": "http://robi.me/draft-punk",

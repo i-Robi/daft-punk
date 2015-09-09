@@ -1,6 +1,8 @@
 /**
- * @file Guitar engine.
+ * @file Scratch
  * @author Sébastien Robaszkiewicz [sebastien@robaszkiewicz.com]
+ * @description Converts the action of scratching the screen or moving the
+ * mouse into an energy value between 0 and 1.
  */
 
 'use strict';
@@ -81,8 +83,6 @@ class Scratch extends EventEmitter {
     this._x = null;
     this._y = null;
     this._s = null;
-    this._lastX = null;
-    this._lastY = null;
     this._lastS = null;
     this._acc = null;
 
