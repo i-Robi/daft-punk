@@ -3,6 +3,7 @@
  * @author <a href='mailto:hello@robi.me'>Sébastien Robaszkiewicz</a>
  */
 
+// Import partials
 @import 'reset';
 @import 'animation-mixins';
 @import 'transform-mixins';
@@ -123,10 +124,7 @@ header, footer {
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 480px) {
-  .subtitle {
-    font-size: 1.2rem;
-    letter-spacing: 0.45rem;
-  }
+
 }
 
 /* Small Devices, Tablets */
@@ -134,15 +132,6 @@ header, footer {
   html, body {
     font-size: 14px;
   }
-
-  .icons {
-    margin-top: 3.5rem;
-
-    .diamond::before {
-      border: 2px solid white;
-    }
-  }
-
 }
 
 /* Medium Devices, Desktops */
@@ -158,13 +147,5 @@ header, footer {
 
   .title {
     letter-spacing: 0.9rem;
-  }
-
-  .icons {
-    margin-top: 4rem;
-
-    li {
-      margin: 0 2.25rem;
-    }
   }
 }
