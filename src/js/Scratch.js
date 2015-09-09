@@ -124,6 +124,10 @@ class Scratch extends EventEmitter {
       );
     }
 
+    // Weird bug on Safari desktop (it looks like that displaying something in
+    // the console prevents the guitar from blocking).
+    // console.log(pos[0]);
+
     this.emit('scratch', this.event);
 
     clearTimeout(this._timeout);
