@@ -9,6 +9,7 @@
 @import 'transform-mixins';
 @import 'flexbox-mixins';
 @import 'icons';
+@import 'dot-nav';
 
 html, body {
   height: 100%;
@@ -26,7 +27,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .container {
@@ -62,9 +63,9 @@ header, footer {
 }
 
 .loader {
-  font-size: 2.4rem;
-  letter-spacing: 1.5rem;
-  text-indent: 1.5rem;
+  font-size: 2rem;
+  letter-spacing: 1.2rem;
+  text-indent: 1.2rem;
   text-transform: uppercase;
 }
 
@@ -74,54 +75,6 @@ header, footer {
   box-shadow: inset 0 0 0 2px white;
   font-size: 6rem;
   padding: 2rem;
-}
-
-.dot-nav {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-  max-width: 50rem;
-  margin: auto;
-  @include flexbox;
-  @include justify-content(space-between);
-
-  li {
-    width: 33%;
-    cursor: pointer;
-  }
-
-  .label {
-    font-size: 0.8rem;
-    letter-spacing: 0.1rem;
-    margin-bottom: 1rem;
-    text-indent: 0.1rem;
-    text-transform: uppercase;
-  }
-
-  .dot {
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 2px white;
-    height: 1.5rem;
-    margin: auto;
-    width: 1.5rem;
-  }
-
-  .dot::after {
-    background-color: #fff;
-    border-radius: 50%;
-    content: '';
-    height: inherit;
-    position: absolute;
-    width: inherit;
-    margin-left: -0.75rem;
-    @include transform(scale(0));
-  	@include transform-origin('50% 50%');
-  	@include transition('-webkit-transform 0.3s ease');
-  }
-
-  .selected .dot::after {
-    @include transform(scale(1));
-  }
 }
 
 /* Modernizr */
@@ -150,7 +103,9 @@ header, footer {
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 480px) {
-
+  html, body {
+    font-size: 12px;
+  }
 }
 
 /* Small Devices, Tablets */

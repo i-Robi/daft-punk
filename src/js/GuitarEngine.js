@@ -92,7 +92,7 @@ class GuitarEngine extends TimeEngine {
   /**
    *
    */
-  constructor(options = {}) {
+  constructor(options) {
     super();
 
     // Public attributes
@@ -141,12 +141,15 @@ class GuitarEngine extends TimeEngine {
     return nextPosition;
   }
 
+  /**
+   *
+   */
   advancePosition(time, position, speed) {
     const currentBeat = Math.floor(
       (time - this.startTime - this.offset) / this.period
     );
     const rand = Math.random();
-    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2); // TODO (inputM)
+    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2); // TODO: update input module
     const sMax = getMaxOfArray(this._scratchBuffer);
     const level = Math.max(eMax, sMax);
 
@@ -252,23 +255,30 @@ class GuitarEngine extends TimeEngine {
     this._mode = mode;
 
     switch(mode) {
-      case 0: // Stick to the original song
+      // WORK IN PROGRESS: Replacing play modes by different songs
+      // case 0: // Stick to the original song
+      //   this._p1Accent = 1;
+      //   this._p1NoAccent = 0;
+      //   this._p2BaseValue = 0;
+      //   this._p2MultiplyingFactor = 0;
+      //   break;
+      // case 1: // A little guidance
+      //   this._p1Accent = 1;
+      //   this._p1NoAccent = 0.3;
+      //   this._p2BaseValue = 0.4;
+      //   this._p2MultiplyingFactor = 1.1;
+      //   break;
+      // case 2: // Complete freedom
+      //   this._p1Accent = 1;
+      //   this._p1NoAccent = 0.5;
+      //   this._p2BaseValue = 0.5;
+      //   this._p2MultiplyingFactor = 1.2;
+      //   break;
+      case 0:
         this._p1Accent = 1;
-        this._p1NoAccent = 0;
-        this._p2BaseValue = 0;
-        this._p2MultiplyingFactor = 0;
-        break;
-      case 1: // A little guidance
-        this._p1Accent = 1;
-        this._p1NoAccent = 0.3;
-        this._p2BaseValue = 0.4;
+        this._p1NoAccent = 0.05;
+        this._p2BaseValue = 0.1;
         this._p2MultiplyingFactor = 1.1;
-        break;
-      case 2: // Complete freedom
-        this._p1Accent = 1;
-        this._p1NoAccent = 0.5;
-        this._p2BaseValue = 0.5;
-        this._p2MultiplyingFactor = 1.2;
         break;
     }
   }

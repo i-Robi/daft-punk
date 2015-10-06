@@ -9,25 +9,27 @@
 
 const EventEmitter = require('events').EventEmitter;
 
-function speed(a, b) {
-  const dX = a[0] - b[0];
-  const dY = a[1] - b[1];
-  const dT = b[2] - a[2];
+function speed(startPosition, endPosition) {
+  const dX = endPosition[0] - startPosition[0];
+  const dY = endPosition[1] - startPosition[1];
+  const dT = endPosition[2] - startPosition[2];
+  const timestamp = endPosition[2];
 
-  if (dX !== 0 && dY !== 0 && dT !== 0)
-    return [Math.sqrt(dX * dX + dY * dY) / dT, b[2]];
+  if (dT !== 0)
+    return [Math.sqrt(dX * dX + dY * dY) / dT, timestamp];
 
-  return [0, b[2]];
+  return [0, timestamp];
 }
 
-function acc(a, b) {
-  const dS = b[0] - a[0];
-  const dT = b[1] - a[1];
+function acc(startSpeed, endSpeed) {
+  const dS = endSpeed[0] - startSpeed[0];
+  const dT = endSpeed[1] - startSpeed[1];
+  const timestamp = endSpeed[1];
 
-  if (dS !== 0 && dT !== 0)
-    return [dS / dT, b[1]];
+  if (dT !== 0)
+    return [dS / dT, timestamp];
 
-  return [0, b[1]];
+  return [0, timestamp];
 }
 
 function getTime() {
@@ -91,6 +93,10 @@ class Scratch extends EventEmitter {
   }
 
   onMotion(e) {
+    // /!\ BUG
+    // As of Safari 9.0 (11601.1.56) for Mac OS X 10.11 (15A284), Safari
+    // triggers each mousemove event twice unless the mouse button is down while
+    // dragging).
     const timestamp = e.timeStamp / 1000;
     let x;
     let y;
@@ -109,24 +115,19 @@ class Scratch extends EventEmitter {
     const pos = [x, y, timestamp];
 
     if (this._pos) {
-      this._lastS = this._s;
-      this._s = speed(pos, this._pos);
+      this._lastS = this._s; // remains null the first time onMotion is called
+      this._s = speed(this._pos, pos);
     }
 
     if (this._lastS)
-      this._acc = acc(this._s, this._lastS);
+      this._acc = acc(this._lastS, this._s);
 
-    this._pos = [x, y, timestamp];
+    this._pos = pos;
 
     if (this._acc) {
-      this.event = this._filter.input(
-        Math.min(Math.abs(this._acc[0] / 100000), 1)
-      );
+      const accValue = Math.min(Math.abs(this._acc[0] / 100000), 1);
+      this.event = this._filter.input(accValue);
     }
-
-    // Weird bug on Safari desktop (it looks like that displaying something in
-    // the console prevents the guitar from blocking).
-    // console.log(pos[0]);
 
     this.emit('scratch', this.event);
 

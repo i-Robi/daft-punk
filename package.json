@@ -1,15 +1,15 @@
 {
-  "name": "draft-punk",
-  "version": "1.0.0",
+  "name": "daft-punk",
+  "version": "1.0.1",
   "description": "Interactive version of Daft Punk's Lose Yourself To Dance.",
   "main": "build/index.js",
-  "homepage": "http://robi.me/draft-punk",
+  "homepage": "http://robi.me/daft-punk",
   "author": {
     "name": "Sébastien Robaszkiewicz",
     "email": "hello@robi.me",
     "url": "http://robi.me"
   },
-  "repository": "i-Robi/draft-punk",
+  "repository": "i-Robi/daft-punk",
   "standalone": "script",
   "scripts": {
     "bundle": "node ./bin/scripts.js --bundle",
@@ -18,6 +18,7 @@
     "postbundle": "npm run uglify",
     "prebundle": "npm run hint && npm run transpile",
     "sass": "node ./bin/scripts.js --sass",
+    "start": "http-server",
     "transpile": "node ./bin/scripts.js --transpile",
     "uglify": "node ./bin/scripts.js --uglify",
     "watch": "node ./bin/scripts.js --watch"
