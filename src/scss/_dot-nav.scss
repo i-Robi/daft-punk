@@ -1,0 +1,47 @@
+.dot-nav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+  max-width: 50rem;
+  margin: auto;
+  @include flexbox;
+  @include justify-content(space-around);
+
+  li {
+    width: 33%;
+    cursor: pointer;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    text-indent: 0.1rem;
+    text-transform: uppercase;
+  }
+
+  .dot {
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px white;
+    height: 1.5rem;
+    margin: auto;
+    width: 1.5rem;
+  }
+
+  .dot::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: '';
+    height: inherit;
+    position: absolute;
+    width: inherit;
+    margin-left: -0.75rem;
+    @include transform(scale(0));
+  	@include transform-origin('50% 50%');
+  	@include transition('-webkit-transform 0.3s ease');
+  }
+
+  .selected .dot::after {
+    @include transform(scale(1));
+  }
+}
