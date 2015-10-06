@@ -146,7 +146,7 @@ class GuitarEngine extends TimeEngine {
       (time - this.startTime - this.offset) / this.period
     );
     const rand = Math.random();
-    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2); // TODO (inputM)
+    const eMax = Math.pow(getMaxOfArray(this._energyBuffer), 2); // TODO: update input module
     const sMax = getMaxOfArray(this._scratchBuffer);
     const level = Math.max(eMax, sMax);
 
